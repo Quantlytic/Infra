@@ -1,0 +1,48 @@
+name: Deploy Services to Minikube
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      # This workflow will ONLY run if files change in these directories
+      - 'kafka/**'
+      - 'minio/**'
+      - 'timescaledb/**'
+
+jobs:
+  deploy-kafka:
+    # This job only runs if changes occurred in the 'kafka/' directory
+    if: "contains(github.event.head_commit.message, '[force deploy]') || contains(toJson(github.event.commits), 'kafka/')"
+    name: Deploy Kafka
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Deploy Kafka Manifests
+        run: kubectl apply -k kafka/ # Using -k for kustomize or -f for files
+
+  # deploy-minio:
+  #   # This job only runs if changes occurred in the 'minio/' directory
+  #   if: "contains(github.event.head_commit.message, '[force deploy]') || contains(toJson(github.event.commits), 'minio/')"
+  #   name: Deploy MinIO
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v4
+
+  #     - name: Deploy MinIO Manifests
+  #       run: kubectl apply -f minio/
+
+  # deploy-timescaledb:
+  #   # This job only runs if changes occurred in the 'timescaledb/' directory
+  #   if: "contains(github.event.head_commit.message, '[force deploy]') || contains(toJson(github.event.commits), 'timescaledb/')"
+  #   name: Deploy TimescaleDB
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v4
+
+  #     - name: Deploy TimescaleDB Manifests
+  #       run: kubectl apply -f timescaledb/

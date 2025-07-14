@@ -1,0 +1,14 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: processeddata
+  namespace: kafka
+  labels:
+    # This label tells the operator which Kafka cluster this topic belongs to
+    strimzi.io/cluster: "quantlytic-kafka" 
+spec:
+  partitions: 1
+  replicas: 1
+  config:
+    retention.ms: 604800000 # 7 days
+    segment.bytes: 1073741824 # 1 GB

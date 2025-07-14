@@ -1,0 +1,7 @@
+# kafka/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - kafka-cluster.yaml
+  - topics/topic-stockdata.yaml
+  - topics/topic-processeddata.yaml
