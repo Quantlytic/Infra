@@ -3,6 +3,8 @@ kind: Kafka
 metadata:
   name: quantlytic-kafka
   namespace: kafka
+  annotations:
+    strimzi.io/kraft: "enabled"
 spec:
   kafka:
     version: 3.7.0
