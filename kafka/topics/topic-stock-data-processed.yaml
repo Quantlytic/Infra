@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: processeddata
+  name: stock-data-processed
   namespace: kafka
   labels:
     # This label tells the operator which Kafka cluster this topic belongs to
