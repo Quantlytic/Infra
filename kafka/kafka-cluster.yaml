@@ -3,17 +3,24 @@ kind: Kafka
 metadata:
   name: quantlytic-kafka
   namespace: kafka
-  annotations:
-    strimzi.io/node-pools: enabled
-    strimzi.io/kraft: enabled
 spec:
   kafka:
     version: 4.0.0
+    replicas: 1
+    kraft:
+      enabled: true
+      controllerQuorum:
+        replicas: 1
     listeners:
       - name: plain
         port: 9092
         type: internal
         tls: false
+    storage:
+      type: ephemeral
+    config:
+      inter.broker.protocol.version: "4.0"
+      log.message.format.version: "4.0"
   entityOperator:
     topicOperator: {}
     userOperator: {}
