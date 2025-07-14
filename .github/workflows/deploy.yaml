@@ -20,17 +20,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy Kafka Manifests
-        run: minikube kubectl apply -k kafka/
-
-  manual-redeploy:
-    if: github.event_name == 'workflow_dispatch'
-    name: Manual Redeploy All Services
-    runs-on: self-hosted
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: Apply all manifests
-        run: |
-          echo "Starting manual full redeployment..."
-          minikube kubectl -- apply -k kafka/
+        run: minikube kubectl -- apply -k kafka/
