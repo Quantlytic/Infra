@@ -18,14 +18,14 @@ sudo cp minikube-linux-amd64 /usr/local/bin/minikube
 sudo chmod +x /usr/local/bin/minikube
 ```
 
-Additional addon:
-```
-minikube addons enable ingress
-```
-
 #### Start Cluster
 ```
 minikube start --driver=docker
+```
+
+Additional addon:
+```
+minikube addons enable ingress
 ```
 
 #### Setup Kubectl
@@ -39,3 +39,13 @@ To simplify commands, add the following alias to your `.bashrc`:
 alias kubectl="minikube kubectl --"
 ```
 Don't forget to run `source ~/.bashrc` after adding the alias.
+
+#### Configure Strimzi
+Create kafka namespace
+```
+kubectl create namespace kafka
+```
+Install strimzi
+```
+kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
+```
