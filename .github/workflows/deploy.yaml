@@ -8,12 +8,11 @@ on:
       - 'kafka/**'
       - 'minio/**'
       - 'timescaledb/**'
-  
+
   workflow_dispatch:
 
 jobs:
   deploy-kafka:
-    if: "contains(github.event.head_commit.message, '[force deploy]') || contains(toJson(github.event.commits), 'kafka/')"
     name: Deploy Kafka
     runs-on: self-hosted
     steps:
@@ -23,9 +22,7 @@ jobs:
       - name: Deploy Kafka Manifests
         run: kubectl apply -k kafka/
 
-
   manual-redeploy:
-    # This 'if' ensures this job ONLY runs when you click the button
     if: github.event_name == 'workflow_dispatch'
     name: Manual Redeploy All Services
     runs-on: self-hosted
@@ -36,6 +33,4 @@ jobs:
       - name: Apply all manifests
         run: |
           echo "Starting manual full redeployment..."
-          minikube kubectl --  apply -k kafka/
-          # minikube kubectl -- apply -f minio/  <-- Uncomment when you add minio
-          # minikube kubectl -- apply -f timescaledb/ <-- Uncomment when you add timescaledb
+          minikube kubectl -- apply -k kafka/
