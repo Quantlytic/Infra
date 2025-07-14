@@ -9,9 +9,6 @@ spec:
   kafka:
     version: 3.7.0
     replicas: 1
-    roles:
-      - broker
-      - controller
     listeners:
       - name: plain
         port: 9092
