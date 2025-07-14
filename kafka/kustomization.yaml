@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - kafka-pool.yaml
   - kafka-cluster.yaml
-  - topics/topic-stockdata.yaml
-  - topics/topic-processeddata.yaml
+  - topics/topic-stock-data-processed.yaml
+  - topics/topic-stock-data-raw.yaml
