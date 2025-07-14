@@ -1,0 +1,14 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: pool
+  namespace: kafka
+spec:
+  clusterRef:
+    name: quantlytic-kafka
+  replicas: 1
+  roles:
+    - broker
+    - controller
+  storage:
+    type: ephemeral
