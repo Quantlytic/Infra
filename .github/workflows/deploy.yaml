@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy Kafka Manifests
-        run: kubectl apply -k kafka/
+        run: minikube kubectl apply -k kafka/
 
   manual-redeploy:
     if: github.event_name == 'workflow_dispatch'
