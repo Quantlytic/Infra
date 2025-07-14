@@ -36,6 +36,6 @@ jobs:
       - name: Apply all manifests
         run: |
           echo "Starting manual full redeployment..."
-          kubectl apply -k kafka/
-          # kubectl apply -f minio/  <-- Uncomment when you add minio
-          # kubectl apply -f timescaledb/ <-- Uncomment when you add timescaledb
+          minikube kubectl --  apply -k kafka/
+          # minikube kubectl -- apply -f minio/  <-- Uncomment when you add minio
+          # minikube kubectl -- apply -f timescaledb/ <-- Uncomment when you add timescaledb
