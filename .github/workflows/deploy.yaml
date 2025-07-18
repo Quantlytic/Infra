@@ -55,5 +55,9 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      # - name: Deploy Minio Manifests
-      #   run: minikube kubectl -- apply -k minio/
+      - name: Copy config file
+        run: |
+          cp /minio.env minio/overlays/prod/
+
+      - name: Deploy Minio Manifests
+        run: minikube kubectl -- apply -k minio/overlays/prod
