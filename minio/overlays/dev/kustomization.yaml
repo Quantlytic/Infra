@@ -1,0 +1,28 @@
+resources:
+  - ../../base
+
+patches:
+  - target:
+      kind: PersistentVolume
+      name: minio-pv
+    patch: |
+      - op: replace
+        path: /spec/hostPath/path
+        value: /Users/nick/programming/quantlytic/data/minio
+    patch: |
+      - op: replace
+        path: /spec/capacity/storage
+        value: 5Gi
+
+  - target:
+      kind: PersistentVolumeClaim
+      name: minio-pvc
+    patch: |
+      - op: replace
+        path: /spec/resources/requests/storage
+        value: 5Gi
+secretGenerator:
+  - name: minio-secret
+    namespace: minio-dev
+    envs:
+      - minio.env
