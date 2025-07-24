@@ -5,11 +5,10 @@ patches:
   - target:
       kind: PersistentVolume
       name: minio-pv
-    patch: |
+    patch: |-
       - op: replace
         path: /spec/hostPath/path
-        value: /Users/nick/programming/quantlytic/data/minio
-    patch: |
+        value: /mnt/k8s-data
       - op: replace
         path: /spec/capacity/storage
         value: 5Gi

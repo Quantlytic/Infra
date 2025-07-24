@@ -1,2 +1,3 @@
 **/*.env
 minio/base/minio-secret.yaml
+start-dev.sh
