@@ -1,8 +1,0 @@
-# kafka/kustomization.yaml
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - kafka-pool.yaml
-  - kafka-cluster.yaml
-  - topics/topic-stock-data-processed.yaml
-  - topics/topic-stock-data-raw.yaml

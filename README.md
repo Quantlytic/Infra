@@ -1,51 +1,8 @@
 # Infra
 Infrastructure services needed for the data pipeline.
 
+## Running the Infrastructure
+To run the services, execute `docker compose up -d`
 
-# Setup
-## Installation
-### Install Docker
-```
-sudo apt-get install -y docker.io
-```
-
-### Setup Minikube
-
-To install:
-```
-wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo cp minikube-linux-amd64 /usr/local/bin/minikube
-sudo chmod +x /usr/local/bin/minikube
-```
-
-#### Start Cluster
-```
-minikube start --driver=docker
-```
-
-Additional addon:
-```
-minikube addons enable ingress
-```
-
-#### Setup Kubectl
-Install Kubectl with minikube:
-```
-minikube kubectl -- get po -A
-```
-
-To simplify commands, add the following alias to your `.bashrc`:
-```
-alias kubectl="minikube kubectl --"
-```
-Don't forget to run `source ~/.bashrc` after adding the alias.
-
-#### Configure Strimzi
-Create kafka namespace
-```
-kubectl create namespace kafka
-```
-Install strimzi
-```
-kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
-```
+## Migration from Kubernetes
+I decided to migrate the infrastructure from kubernetes to a simple docker compose file. This is a quick way to run a minio server / kafka server without worrying about the complex kubernetes configurations. Ideally, in my next role I won't need to know how to configure and setup a kafka server with auto scaling brokers on the cluster - that would be setup by senior engineers or experienced developers. Because of that, I'm okay with simplifying this part of the project so I can focus on CI/CD and automated deployments for the code I write (like the BinanceConsumer).
